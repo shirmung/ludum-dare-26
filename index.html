@@ -199,11 +199,11 @@
 
                             if (this.x < from.x) {
                                 if (Crafty.viewport.x < 0) {
-                                     Crafty.viewport.x += (from.x - this.x);
+                                     Crafty.viewport.x += (from.x - this.x)/10;
                                 }
                             } else {
                                 if (Crafty.viewport.x > -1000) {
-                                    Crafty.viewport.x -= (this.x - from.x);
+                                    Crafty.viewport.x -= (this.x - from.x)/10;
                                 }
                             }
                         })
@@ -213,9 +213,7 @@
                                 var currentEnemy = this.hit('Enemy')[0].obj;
 
                                 if (!currentEnemy.disabled) {
-                                    Crafty.stop();
-                                    Crafty.e('HTML')
-                                        .append('<div style="font-size:40px; color: white">GAME OVER BItCHZ</div>');
+                                    Crafty.scene('game-over');
                                 }
                             }
                         });
@@ -254,6 +252,10 @@
                                 .followAI(1);
 
                 enemies.push(enemy2);
+            });
+
+            Crafty.scene('game-over', function() {
+                Crafty.background('red');
             });
 
             //Crafty.scene('main-menu');
