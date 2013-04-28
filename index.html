@@ -11,6 +11,7 @@
 
     <body>
         <script type="text/javascript">
+            var enemies = [];
             var disabledLights = [];
 
             Crafty.init(1000, 600);
@@ -55,16 +56,23 @@
                     .collision();
 
                 Crafty.c('FollowAI', {
-                    followAI: function() {
+                    _disabled: false,
+                    _speed: 0,
+
+                    followAI: function(speed) {
+                        this.speed = speed;
+
                         this.bind('EnterFrame', function() {
-                            if (disabledLights.length == 0) {
+                            if (!this.disabled) {
                                 if (this.x <= player.x + 5) {
-                                    this.x += 2;
+                                    this.x += this.speed;
                                 } else if (this.x >= player.x + 5) {
-                                    this.x -= 2;
+                                    this.x -= this.speed;
                                 }
                             }
                         });
+
+                        return this;
                     }
                 });
 
@@ -87,9 +95,21 @@
                                 if (currentLight.color() == 'rgb(255, 0, 255)') {
                                     currentLight.color('rgb(255, 255, 0)');
                                     disabledLights.push(currentLight);
+
+                                    $.each(enemies, function(index, value) {
+                                        if (value.x >= currentLight.x - 50 && value.x <= currentLight.x + 50) {
+                                            value.disabled = true;
+                                        }
+                                    });
                                 } else {
                                     currentLight.color('rgb(255, 0, 255)');
                                     disabledLights.splice(disabledLights.indexOf(currentLight), 1);
+
+                                    $.each(enemies, function(index, value) {
+                                        if (value.x >= currentLight.x - 50 && value.x <= currentLight.x + 50) {
+                                            value.disabled = false;
+                                        }
+                                    });
                                 }
 
                                 this.pressed = false;
@@ -111,10 +131,14 @@
                         })
 
                         this.bind('EnterFrame', function() {
-                            if (this.hit('Enemy') && disabledLights.length == 0) {
-                                Crafty.stop();
-                                Crafty.e('HTML')
-                                    .append('<div style="font-size:40px; color: white">GAME OVER BItCHZ</div>');
+                            if (this.hit('Enemy')) {
+                                var currentEnemy = this.hit('Enemy')[0].obj;
+
+                                if (!currentEnemy.disabled) {
+                                    Crafty.stop();
+                                    Crafty.e('HTML')
+                                        .append('<div style="font-size:40px; color: white">GAME OVER BItCHZ</div>');
+                                }
                             }
                         });
 
@@ -130,12 +154,21 @@
                 	            .runInto()
                 	            .lightSwitch();
 
-                var enemy = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
+                var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
-                	            .attr({ x: 300, y: 450, w: 10, h: 50 })
+                                .attr({ x: 300, y: 450, w: 10, h: 50 })
                                 .collision()
-                	            .gravity('Platform')
-                	            .followAI();
+                                .gravity('Platform')
+                                .followAI(2);
+                enemies.push(enemy1);
+
+	            var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
+                                .color('rgb(0, 255, 255)')
+                                .attr({ x: 600, y: 450, w: 10, h: 50 })
+                                .collision()
+                                .gravity('Platform')
+                                .followAI(1);
+                enemies.push(enemy2);
             });
 
             //Crafty.scene('main-menu');
