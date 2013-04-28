@@ -9,6 +9,7 @@
         <script src="js/crafty.js"></script>
         <script src="js/raphael.js"></script>
         <script src="js/graphics.js"></script>
+        <script src="js/environment.js"></script>
         <style>
         html, body {
             background: #222;
@@ -18,41 +19,16 @@
 
     <body>
         <script type="text/javascript">
-            var enemies = [];
-            var disabledLights = [];
             var SCREEN_WIDTH = 2000;
             var SCREEN_HEIGHT = 600;
             var VIEWPORT_WIDTH = 1000;
             var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
 
-            // height and radius are optional; it's random otherwise
-            function makeLight(x, y, height, radius) {
-                height = height || Math.floor(Math.random() * 120) + 100;
-                radius = radius || Math.floor(Math.random() * 200) + 50;
+            var enemies = [];
+            var disabledLights = [];
 
-                var lightCircle = Crafty.e('2D, DOM, CircleShape')
-                    .attr({
-                        x: x - radius,
-                        y: y - height - radius,
-                        w: 36 + 2*radius,
-                        h: 62 + 2*radius
-                    });
-
-                // Sprite for light
-                Crafty.e('2D, DOM, LampSprite')
-                    .attr({ x: x, y: y - height, w: 36, h: height });
-
-                Crafty.e('2D, DOM, LampSprite, Light, Collision')
-                    .attr({ x: x, y: y - height, w: 36, h: 62,
-                        lightRadius: radius, on: true, lightCircle: lightCircle })
-                    .collision();
-
-                lightCircle.CircleShape();
-
-            }
-
-            Crafty.init(2000, 600);
-            Crafty.viewport.init(1000, 600);
+            Crafty.init(SCREEN_WIDTH, SCREEN_HEIGHT);
+            Crafty.viewport.init(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
             Crafty.scene('main-menu', function() {
                 Crafty.background('url(images/title.png) center center no-repeat');
@@ -62,42 +38,7 @@
             });
 
             Crafty.scene('play-game', function() {
-                Crafty.background('url(images/background.png)');
-
-                Crafty.e('2D, DOM, TreeSprite')
-                    .attr({ x: 100, y: 400 - 496, w: 2*196, h: 496 });
-                
-                Crafty.e('2D, DOM, Platform, Color')
-                    .color('#030408')
-                    .attr({ x: 0, y: 400, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - 400 });
-
-                Crafty.e('2D, DOM, Start, Color, Collision, Solid')
-                    .color('rgb(0, 0, 255)')
-                    .attr({ x: -1, y: 0, w: 1, h: 600 })
-                    .collision();
-
-                Crafty.e('2D, DOM, End, Color, Collision, Solid')
-                    .color('rgb(0, 0, 255)')
-                    .attr({ x: 2000, y: 0, w: 1, h: 600 })
-                    .collision();
-
-                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
-                    .color('#030408')
-                    .attr({ x: 300, y: 300, w: 50, h: 100 })
-                	.collision();
-
-                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
-                    .color('#030408')
-                    .attr({ x: 500, y: 300, w: 100, h: 100 })
-                	.collision();
-
-                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
-                    .color('#030408')
-                    .attr({ x: 600, y: 200, w: 50, h: 200 })
-                	.collision();
-
-                makeLight(200, 400);
-                makeLight(450, 400);
+                Environment.draw();
 
                 Crafty.c('FollowAI', {
                     _disabled: false,
