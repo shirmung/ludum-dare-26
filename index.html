@@ -12,7 +12,7 @@
     <body>
         <script type="text/javascript">
             // each enemy needs disabled variable
-            var disabled = false;
+            var disabledLights = [];
 
             Crafty.init(1000, 600);
         
@@ -44,18 +44,13 @@
                     .color('rgb(0, 0, 255)')
                 	.attr({ x: 600, y: 300, w: 50, h: 200 })
                 	.collision();
-
-                var light = Crafty.e('2D, DOM, Light, Color, Collision')
-                                .color('rgb(255, 0, 255)')
-                                .attr({ x: 200, y: 400, w: 10, h: 10 })
-                                .collision();
                                 
                 Crafty.c('FollowAI', {
                     _speed: 10,
 
                     followAI: function() {
                         this.bind('EnterFrame', function() {
-                            if (!disabled) {
+                            if (disabledLights.length == 0) {
                                 if (this.x < player.x + 5) {
                                     this.x += 2;
                                 } else if (this.x > player.x + 5) {
@@ -80,14 +75,14 @@
 
                         .bind('Moved', function(from) {
                             if (this.hit('Light') && this.pressed) {
-
                                 if (light.color() == 'rgb(255, 0, 255)') {
                                     light.color('rgb(255, 255, 0)');
+                                    disabledLights.push(this);
                                 } else {
                                     light.color('rgb(255, 0, 255)');
+                                    disabledLights.splice(disabledLights.indexOf(this), 1);
                                 }
 
-                                disabled = true;
                                 this.pressed = false;
                             }
                         });
@@ -105,7 +100,7 @@
                                 this.attr({x: from.x, y: from.y});
                             } 
 
-                            if (this.hit('Enemy') && !disabled) {
+                            if (this.hit('Enemy') && disabledLights.length == 0) {
                                 Crafty.stop();
                                 Crafty.e('HTML')
                                     .append('<div style="font-size:40px; color: white">GAME OVER BItCHZ</div>');
@@ -129,6 +124,11 @@
                 	            .attr({ x: 300, y: 450, w: 10, h: 50 })
                 	            .gravity('Platform')
                 	            .followAI();
+
+                var light = Crafty.e('2D, DOM, Light, Color, Collision')
+                                .color('rgb(255, 0, 255)')
+                                .attr({ x: 200, y: 400, w: 10, h: 10 })
+                                .collision();
             });
 
             //Crafty.scene('main-menu');
