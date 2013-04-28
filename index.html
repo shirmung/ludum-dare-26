@@ -41,9 +41,9 @@
             Crafty.init(1000, 600);
 
             Crafty.scene('main-menu', function() {
-                Crafty.background('#000');
+                Crafty.background('url(images/title.png) center center no-repeat');
                 Crafty.e('HTML')
-                    .attr({ w: 1000, h: 20, x: 0, y: 200 })
+                    .attr({ w: SCREEN_WIDTH, h: 20, x: 0, y: SCREEN_HEIGHT - 20 })
                     .append('<div id="begin"><button id="begin-button">BEGIN</button></div>');                                     
             });
 
