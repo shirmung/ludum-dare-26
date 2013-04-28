@@ -22,6 +22,8 @@
             var disabledLights = [];
             var SCREEN_WIDTH = 2000;
             var SCREEN_HEIGHT = 600;
+            var VIEWPORT_WIDTH = 1000;
+            var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
 
             // height and radius are optional; it's random otherwise
             function makeLight(x, y, height, radius) {
@@ -196,16 +198,6 @@
                             if (this.hit('Solid')) {
                                 this.attr({x: from.x, y: from.y});
                             }
-
-                            if (this.x < from.x) {
-                                if (Crafty.viewport.x < 0) {
-                                     Crafty.viewport.x += (from.x - this.x)/10;
-                                }
-                            } else {
-                                if (Crafty.viewport.x > -1000) {
-                                    Crafty.viewport.x -= (this.x - from.x)/10;
-                                }
-                            }
                         })
 
                         this.bind('EnterFrame', function() {
@@ -222,13 +214,20 @@
                     }
                 });
 
+                var cameraX = 0;
                 var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Twoway, Gravity, RunInto, LightSwitch, Tween')
                 	            .attr({ x: -32, y: 400 - 44, w: 32, h: 44 })
                 	            .runInto()
                 	            .lightSwitch()
                                 .ProtagAnims()
                                 .animate('walk_right', 20, -1)
-                                .tween({x: 10}, 10);
+                                .tween({x: 10}, 10)
+                                .bind('EnterFrame', function() {
+                                    cameraX -= (this.x + cameraX)/10;
+                                    Crafty.viewport.x = cameraX + VIEWPORT_WIDTH / 2;
+                                    Crafty.viewport.x = Math.min(0, Crafty.viewport.x);
+                                    Crafty.viewport.x = Math.max(-VIEWPORT_WIDTH, Crafty.viewport.x);
+                                });
 
                 setTimeout(function() {
                     // Gravity is here b/c it f's up the animations otherwise.
