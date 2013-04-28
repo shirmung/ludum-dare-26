@@ -47,6 +47,16 @@
                                         this.x -= this.speed;
                                     }
                                 }
+
+                                if (Crafty.frame() % 10 == 0) {
+                                    if (this.up == true) {
+                                        this.y -= 2;
+                                        this.up = false;
+                                    } else {
+                                        this.y += 2;
+                                        this.up = true;
+                                    }
+                                }
                             }
                         });
 
@@ -168,23 +178,21 @@
                     player.stop().gravity('Platform').twoway(3, 7);
                 }, 16.66);
 
-                var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
+                var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, FollowAI')
                                 .color('rgb(0, 255, 255)')
-                                .attr({ x: 290, y: 450, w: 10, h: 50,
-                                    disabled: false, speed: 2, leftLimit: 0, rightLimit: 290})
+                                .attr({ x: 290, y: 340, w: 10, h: 50,
+                                    disabled: false, speed: 2, up: true, leftLimit: 0, rightLimit: 290})
                                 .collision()
-                                .gravity('Platform')
                                 .followAI();
 
                 enemies.push(enemy1);
 
-                var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
-                                                .color('rgb(0, 255, 255)')
-                                                .attr({ x: 490, y: 450, w: 10, h: 50,
-                                                    disabled: false, speed: 1, leftLimit: 350, rightLimit: 490 })
-                                                .collision()
-                                                .gravity('Platform')
-                                                .followAI();
+                var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, FollowAI')
+                                .color('rgb(0, 255, 255)')
+                                .attr({ x: 490, y: 320, w: 10, h: 50,
+                                    disabled: false, speed: 1, up: false, leftLimit: 352, rightLimit: 490 })
+                                .collision()
+                                .followAI();
                 enemies.push(enemy2);
             });
 
