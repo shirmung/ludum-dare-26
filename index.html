@@ -44,9 +44,13 @@
                         this.bind('EnterFrame', function() {
                             if (!this.disabled) {
                                 if (this.x <= player.x + 5) {
-                                    this.x += this.speed;
+                                    if ((this.x + this.speed) <= this.rightLimit) {
+                                        this.x += this.speed;
+                                    }
                                 } else if (this.x >= player.x + 5) {
-                                    this.x -= this.speed;
+                                    if ((this.x + this.speed) >= this.leftLimit) {
+                                        this.x -= this.speed;
+                                    }
                                 }
                             }
                         });
@@ -171,20 +175,19 @@
 
                 var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
-                                .attr({ x: 300, y: 450, w: 10, h: 50 })
+                                .attr({ x: 290, y: 450, w: 10, h: 50, leftLimit: 0, rightLimit: 290})
                                 .collision()
                                 .gravity('Platform')
                                 .followAI(2);
 
                 enemies.push(enemy1);
 
-	            var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
-                                .color('rgb(0, 255, 255)')
-                                .attr({ x: 600, y: 450, w: 10, h: 50 })
-                                .collision()
-                                .gravity('Platform')
-                                .followAI(1);
-
+                var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
+                                                .color('rgb(0, 255, 255)')
+                                                .attr({ x: 490, y: 450, w: 10, h: 50, leftLimit: 350, rightLimit: 490 })
+                                                .collision()
+                                                .gravity('Platform')
+                                                .followAI(1);
                 enemies.push(enemy2);
             });
 
