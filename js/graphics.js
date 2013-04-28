@@ -22,6 +22,14 @@ Crafty.sprite("images/city.png", {
   CitySprite4: [338, 0]
 });
 
+Crafty.sprite("images/star.png", {
+  StarSprite: [0, 0]
+});
+
+Crafty.sprite("images/enemy.png", {
+  EnemySprite: [0, 0]
+});
+
 function playAnimation(entity, animId, delay, repeat) {
   if (!entity.isPlaying(animId)) {
     entity.stop().animate(animId, delay, repeat);
@@ -33,14 +41,14 @@ Crafty.c('ProtagAnims', {
     var prevDirection = "right";
     var prevY = null;
     this.requires("SpriteAnimation")
-      .animate("walk_left",  [[0, 44], [32, 44], [0, 44], [64, 44]])
-      .animate("idle_left",  [[0, 44], [160, 44]])
-      .animate("walk_right", [[0,  0], [32,  0], [0,  0], [64,  0]])
-      .animate("idle_right", [[0,  0], [160,  0]])
-      .animate("jump_left_end", [[96, 44]])
-      .animate("jump_left_begin",   [[128, 44]])
-      .animate("jump_right_begin", [[96, 0]])
-      .animate("jump_right_end", [[128, 0]])
+      .animate("walk_left",  [[0, 88], [64, 88], [0, 88], [128, 88]])
+      .animate("idle_left",  [[0, 88], [320, 88]])
+      .animate("walk_right", [[0,  0], [64,  0], [0,  0], [128,  0]])
+      .animate("idle_right", [[0,  0], [320,  0]])
+      .animate("jump_left_end", [[196, 88]])
+      .animate("jump_left_begin",   [[256, 88]])
+      .animate("jump_right_begin", [[196, 0]])
+      .animate("jump_right_end", [[256, 0]])
       .bind("NewDirection", function (direction) {
         if (direction.x < 0) {
           playAnimation(this, "walk_left", 20, -1);

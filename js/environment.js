@@ -1,4 +1,5 @@
 var Environment = {
+    BASE_GROUND_Y: 600,
     draw: function() {
         this.drawBoundaries();
         this.drawBackground();
@@ -9,7 +10,7 @@ var Environment = {
     drawBoundaries: function() {
         Crafty.e('2D, DOM, Platform, Color')
             .color('#030408')
-            .attr({ x: 0, y: 400, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - 400 });
+            .attr({ x: 0, y: Environment.BASE_GROUND_Y, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - Environment.BASE_GROUND_Y });
 
         Crafty.e('2D, DOM, Start, Color, Collision, Solid')
             .color('rgb(0, 0, 255)')
@@ -26,44 +27,44 @@ var Environment = {
         Crafty.background('url(images/background.png)');
 
         Crafty.e('2D, DOM, TreeSprite')
-            .attr({ x: 100, y: 400 - 496, w: 392, h: 496 });
+            .attr({ x: 100, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
 
         Crafty.e('2D, DOM, BenchSprite')
-            .attr({ x: 20, y: 400 - 74, w: 168, h: 74 });
+            .attr({ x: 20, y: Environment.BASE_GROUND_Y - 74, w: 168, h: 74 });
 
         Crafty.e('2D, DOM, CitySprite1')
-            .attr({ x: 1000, y: 400 - 208, w: 146, h: 208 });
+            .attr({ x: 1000, y: Environment.BASE_GROUND_Y - 208, w: 146, h: 208 });
 
         Crafty.e('2D, DOM, CitySprite2')
-            .attr({ x: 1200, y: 400 - 500, w: 80, h: 500 });
+            .attr({ x: 1200, y: Environment.BASE_GROUND_Y - 500, w: 80, h: 500 });
 
         Crafty.e('2D, DOM, CitySprite3')
-            .attr({ x: 1232, y: 400 - 152, w: 112, h: 152 });
+            .attr({ x: 1262, y: Environment.BASE_GROUND_Y - 152, w: 112, h: 152 });
 
         Crafty.e('2D, DOM, CitySprite4')
-            .attr({ x: 1350, y: 400 - 156, w: 216, h: 156 });
+            .attr({ x: 1400, y: Environment.BASE_GROUND_Y - 156, w: 216, h: 156 });
     },
 
     drawLandscape: function() {
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 300, y: 300, w: 50, h: 100 })
+            .attr({ x: 1050, y: Environment.BASE_GROUND_Y - 50, w: 500, h: 50 })
         	.collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 500, y: 300, w: 100, h: 100 })
+            .attr({ x: 1100, y: Environment.BASE_GROUND_Y - 100, w: 400, h: 50 })
         	.collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 600, y: 200, w: 50, h: 200 })
+            .attr({ x: 1600, y: Environment.BASE_GROUND_Y - 200, w: 400, h: 50 })
         	.collision();
     },
 
     drawLights: function() {
-        this.makeLight(200, 400);
-        this.makeLight(450, 400);
+        this.makeLight(250, Environment.BASE_GROUND_Y);
+        this.makeLight(450, Environment.BASE_GROUND_Y);
     },
 
     // height and radius are optional; it's random otherwise

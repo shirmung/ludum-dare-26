@@ -16,8 +16,8 @@
     <body>
         <script type="text/javascript">
             var SCREEN_WIDTH = 2000;
-            var SCREEN_HEIGHT = 600;
-            var VIEWPORT_WIDTH = 1000;
+            var SCREEN_HEIGHT = 768;
+            var VIEWPORT_WIDTH = 1024;
             var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
 
             var enemies = [];
@@ -42,10 +42,12 @@
                                 if (this.x <= player.x + 5) {
                                     if ((this.x + this.speed) <= this.rightLimit) {
                                         this.x += this.speed;
+                                        this.sprite(0, 0, this.w, this.h);
                                     }
                                 } else if (this.x >= player.x + 5) {
                                     if ((this.x + this.speed) >= this.leftLimit) {
                                         this.x -= this.speed;
+                                        this.sprite(0, this.h, this.w, this.h);
                                     }
                                 }
 
@@ -152,6 +154,10 @@
                                 if (!currentEnemy.disabled) {
                                     Crafty.scene('game-over');
                                 }
+                            } else if (this.hit('Star')) {
+                                var star = this.hit('Star')[0].obj;
+                                // TODO: Cutscene!!!!!!!!
+                                console.log("CUTSCENE LOL");
                             }
                         });
 
@@ -161,7 +167,7 @@
 
                 var cameraX = 0;
                 var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Twoway, Gravity, RunInto, LightSwitch, Tween')
-                	            .attr({ x: -32, y: 400 - 44, w: 32, h: 44 })
+                	            .attr({ x: -32, y: Environment.BASE_GROUND_Y - 88, w: 64, h: 88 })
                 	            .runInto()
                 	            .lightSwitch()
                                 .ProtagAnims()
@@ -180,6 +186,10 @@
                 }, 16.66);
 
                 Enemies.drawEnemies();
+
+                var star = Crafty.e('2D, DOM, Collision, StarSprite, Star')
+                                .attr({ x: 200, y: Environment.BASE_GROUND_Y - 36, w: 36, h: 36})
+                                .collision();
             });
 
             Crafty.scene('game-over', function() {
