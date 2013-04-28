@@ -7,11 +7,19 @@
         <link rel="stylesheet" href="styles/compiled/style.css" />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/crafty.js"></script>
+        <script src="js/graphics.js"></script>
+        <style>
+        html, body {
+            background: #222;
+        }
+        </style>
     </head>
 
     <body>
         <script type="text/javascript">
             var disabledLights = [];
+            var SCREEN_WIDTH = 1000;
+            var SCREEN_HEIGHT = 600;
 
             Crafty.init(1000, 600);
 
@@ -23,11 +31,11 @@
             });
 
             Crafty.scene('play-game', function() {
-                Crafty.background('#333333');
-
+                Crafty.background('url(images/background.png)');
+                
                 Crafty.e('2D, DOM, Platform, Color')
-                    .color('rgb(255, 0, 0)')
-                	.attr({ x: 0, y: 500, w: 1000, h: 1 });
+                    .color('#030408')
+                	.attr({ x: 0, y: 500, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - 500 });
 
                 Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
                     .color('rgb(0, 0, 255)')
@@ -122,13 +130,13 @@
                     }
                 });
 
-                var player = Crafty.e('2D, DOM, Player, Color, Twoway, Gravity, RunInto, LightSwitch')
-                                .color('rgb(0, 255, 0)')
-                	            .attr({ x: 10, y: 450, w: 10, h: 50 })
+                var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Player, Twoway, Gravity, RunInto, LightSwitch')
+                	            .attr({ x: 10, y: 450, w: 32, h: 44 })
                 	            .twoway(3, 7)
                 	            .gravity('Platform')
                 	            .runInto()
-                	            .lightSwitch();
+                	            .lightSwitch()
+                                .ProtagAnims();
 
                 var enemy = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
