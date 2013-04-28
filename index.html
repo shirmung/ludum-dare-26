@@ -11,11 +11,10 @@
 
     <body>
         <script type="text/javascript">
-            // each enemy needs disabled variable
             var disabledLights = [];
 
             Crafty.init(1000, 600);
-        
+
             Crafty.scene('main-menu', function() {
                 Crafty.background('#000');
                 Crafty.e('HTML')
@@ -25,7 +24,7 @@
 
             Crafty.scene('play-game', function() {
                 Crafty.background('#333333');
-                
+
                 Crafty.e('2D, DOM, Platform, Color')
                     .color('rgb(255, 0, 0)')
                 	.attr({ x: 0, y: 500, w: 1000, h: 1 });
@@ -54,14 +53,14 @@
                     .color('rgb(255, 0, 255)')
                     .attr({ x: 450, y: 450, w: 10, h: 10 })
                     .collision();
-                                
+
                 Crafty.c('FollowAI', {
                     followAI: function() {
                         this.bind('EnterFrame', function() {
                             if (disabledLights.length == 0) {
-                                if (this.x < player.x + 5) {
+                                if (this.x <= player.x + 5) {
                                     this.x += 2;
-                                } else if (this.x > player.x + 5) {
+                                } else if (this.x >= player.x + 5) {
                                     this.x -= 2;
                                 }
                             }
@@ -105,11 +104,13 @@
                     runInto: function() {
                         this.requires('Collision')
 
-                        .bind('Moved', function(from) {
+                        this.bind('Moved', function(from) {
                             if (this.hit('Solid')) {
                                 this.attr({x: from.x, y: from.y});
-                            } 
+                            }
+                        })
 
+                        this.bind('EnterFrame', function() {
                             if (this.hit('Enemy') && disabledLights.length == 0) {
                                 Crafty.stop();
                                 Crafty.e('HTML')
@@ -129,9 +130,10 @@
                 	            .runInto()
                 	            .lightSwitch();
 
-                var enemy = Crafty.e('2D, DOM, Enemy, Color, Gravity, FollowAI')
+                var enemy = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
                 	            .attr({ x: 300, y: 450, w: 10, h: 50 })
+                                .collision()
                 	            .gravity('Platform')
                 	            .followAI();
             });
