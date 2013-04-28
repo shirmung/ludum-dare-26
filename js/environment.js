@@ -90,4 +90,4 @@ var Environment = {
 
         lightCircle.CircleShape();
     }
-}
+};
