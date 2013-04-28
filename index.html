@@ -116,19 +116,13 @@
                 });
 
                 Crafty.c('LightSwitch', {
-                    _pressed: false, 
+                    _touched: false,
 
                     lightSwitch: function() {
                         this.requires('Collision')
 
                         .bind('KeyDown', function(e) {
-                            if (e.key == Crafty.keys['SPACE']) {
-                                this.pressed = true;
-                            }
-                        })
-
-                        .bind('Moved', function(from) {
-                            if (this.hit('Light') && this.pressed) {
+                            if (e.key == Crafty.keys['SPACE'] && this.touched) {
                                 var currentLight = this.hit('Light')[0].obj;
                                 var lightRadius = currentLight.attr('lightRadius');
                                 lightRadius *= lightRadius;
@@ -177,7 +171,13 @@
                                     });
                                 }
 
-                                this.pressed = false;
+                                this.switched = false;
+                            }
+                        })
+
+                        .bind('Moved', function() {
+                            if (this.hit('Light')) {
+                                 this.touched = true;
                             }
                         });
 
