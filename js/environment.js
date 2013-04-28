@@ -26,7 +26,10 @@ var Environment = {
         Crafty.background('url(images/background.png)');
 
         Crafty.e('2D, DOM, TreeSprite')
-            .attr({ x: 100, y: 400 - 496, w: 2*196, h: 496 });
+            .attr({ x: 100, y: 400 - 496, w: 392, h: 496 });
+
+        Crafty.e('2D, DOM, BenchSprite')
+            .attr({ x: 20, y: 400 - 74, w: 168, h: 74 });
     },
 
     drawLandscape: function() {
