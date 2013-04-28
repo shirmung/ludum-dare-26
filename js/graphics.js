@@ -55,3 +55,37 @@ Crafty.c('ProtagAnims', {
     return this;
   }
 });
+
+// Create circular element
+Crafty.c("CircleShape", {
+  _circle: null,
+
+  CircleShape: function() {
+    this.requires("2D, DOM");
+    var radius = this._w / 2;
+    var paper = Raphael(this._element, this._w, this._h);
+    var circle = paper.circle(radius, radius, radius);
+    circle.attr("fill", "#c8b3a2");
+    this.circle = circle;
+    this.show();
+
+    function AnimateCircle() {
+      circle.animate({r: radius - 3}, 250, AnimateCircleBack)
+    }
+
+    function AnimateCircleBack() {
+      circle.animate({r: radius}, 250, AnimateCircle);
+    }
+
+    AnimateCircle();
+    return this;
+  },
+
+  hide: function() {
+    this.circle.attr('opacity', 0);
+  },
+
+  show: function() {
+    this.circle.attr('opacity', 0.2);
+  }
+});
