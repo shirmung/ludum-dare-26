@@ -221,13 +221,18 @@
                     }
                 });
 
-                var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Player, Twoway, Gravity, RunInto, LightSwitch')
-                	            .attr({ x: 10, y: 450, w: 32, h: 44 })
-                	            .twoway(3, 7)
-                	            .gravity('Platform')
+                var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Twoway, Gravity, RunInto, LightSwitch, Tween')
+                	            .attr({ x: -32, y: 400 - 44, w: 32, h: 44 })
                 	            .runInto()
                 	            .lightSwitch()
-                                .ProtagAnims();
+                                .ProtagAnims()
+                                .animate('walk_right', 20, -1)
+                                .tween({x: 10}, 10);
+
+                setTimeout(function() {
+                    // Gravity is here b/c it f's up the animations otherwise.
+                    player.stop().gravity('Platform').twoway(3, 7);
+                }, 16.66);
 
                 var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
