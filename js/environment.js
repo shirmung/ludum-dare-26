@@ -70,11 +70,24 @@ var Environment = {
             .color('#030408')
             .attr({ x: 2150, y: Environment.BASE_GROUND_Y - 200, w: 150, h: 50 })
             .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 2450, y: Environment.BASE_GROUND_Y - 100, w: 50, h: 100 })
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 2500, y: Environment.BASE_GROUND_Y - 250, w: 100, h: 250 })
+            .collision();
     },
 
     drawLights: function() {
         this.makeLight(250, Environment.BASE_GROUND_Y);
         this.makeLight(450, Environment.BASE_GROUND_Y);
+        this.makeLight(1700, Environment.BASE_GROUND_Y);
+        this.makeLight(1700, Environment.BASE_GROUND_Y - 200);
+        this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
     },
 
     // height and radius are optional; it's random otherwise
