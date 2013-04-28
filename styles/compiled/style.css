@@ -45,11 +45,13 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
+html, body {
+  background: #222; }
+
 #cr-stage {
   margin-left: auto;
   margin-right: auto; }
 
 #begin {
-  width: 48px;
-  margin-left: auto;
-  margin-right: auto; }
+  position: absolute;
+  right: 1024px; }
