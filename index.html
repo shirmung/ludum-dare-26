@@ -44,10 +44,18 @@
                     .color('rgb(0, 0, 255)')
                 	.attr({ x: 600, y: 300, w: 50, h: 200 })
                 	.collision();
+
+                Crafty.e('2D, DOM, Light, Color, Collision')
+                    .color('rgb(255, 0, 255)')
+                    .attr({ x: 200, y: 400, w: 10, h: 10 })
+                    .collision();
+
+                Crafty.e('2D, DOM, Light, Color, Collision')
+                    .color('rgb(255, 0, 255)')
+                    .attr({ x: 450, y: 450, w: 10, h: 10 })
+                    .collision();
                                 
                 Crafty.c('FollowAI', {
-                    _speed: 10,
-
                     followAI: function() {
                         this.bind('EnterFrame', function() {
                             if (disabledLights.length == 0) {
@@ -75,12 +83,14 @@
 
                         .bind('Moved', function(from) {
                             if (this.hit('Light') && this.pressed) {
-                                if (light.color() == 'rgb(255, 0, 255)') {
-                                    light.color('rgb(255, 255, 0)');
-                                    disabledLights.push(this);
+                                var currentLight = this.hit('Light')[0].obj;
+
+                                if (currentLight.color() == 'rgb(255, 0, 255)') {
+                                    currentLight.color('rgb(255, 255, 0)');
+                                    disabledLights.push(currentLight);
                                 } else {
-                                    light.color('rgb(255, 0, 255)');
-                                    disabledLights.splice(disabledLights.indexOf(this), 1);
+                                    currentLight.color('rgb(255, 0, 255)');
+                                    disabledLights.splice(disabledLights.indexOf(currentLight), 1);
                                 }
 
                                 this.pressed = false;
@@ -124,11 +134,6 @@
                 	            .attr({ x: 300, y: 450, w: 10, h: 50 })
                 	            .gravity('Platform')
                 	            .followAI();
-
-                var light = Crafty.e('2D, DOM, Light, Color, Collision')
-                                .color('rgb(255, 0, 255)')
-                                .attr({ x: 200, y: 400, w: 10, h: 10 })
-                                .collision();
             });
 
             //Crafty.scene('main-menu');
