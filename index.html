@@ -35,12 +35,7 @@
                 Environment.draw();
 
                 Crafty.c('FollowAI', {
-                    _disabled: false,
-                    _speed: 0,
-
-                    followAI: function(speed) {
-                        this.speed = speed;
-
+                    followAI: function() {
                         this.bind('EnterFrame', function() {
                             if (!this.disabled) {
                                 if (this.x <= player.x + 5) {
@@ -175,19 +170,21 @@
 
                 var enemy1 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                 .color('rgb(0, 255, 255)')
-                                .attr({ x: 290, y: 450, w: 10, h: 50, leftLimit: 0, rightLimit: 290})
+                                .attr({ x: 290, y: 450, w: 10, h: 50,
+                                    disabled: false, speed: 2, leftLimit: 0, rightLimit: 290})
                                 .collision()
                                 .gravity('Platform')
-                                .followAI(2);
+                                .followAI();
 
                 enemies.push(enemy1);
 
                 var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
                                                 .color('rgb(0, 255, 255)')
-                                                .attr({ x: 490, y: 450, w: 10, h: 50, leftLimit: 350, rightLimit: 490 })
+                                                .attr({ x: 490, y: 450, w: 10, h: 50,
+                                                    disabled: false, speed: 1, leftLimit: 350, rightLimit: 490 })
                                                 .collision()
                                                 .gravity('Platform')
-                                                .followAI(1);
+                                                .followAI();
                 enemies.push(enemy2);
             });
 
