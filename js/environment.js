@@ -60,6 +60,16 @@ var Environment = {
             .color('#030408')
             .attr({ x: 1600, y: Environment.BASE_GROUND_Y - 200, w: 400, h: 50 })
         	.collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 2100, y: 0, w: 50, h: Environment.BASE_GROUND_Y - 150 })
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 2150, y: Environment.BASE_GROUND_Y - 200, w: 150, h: 50 })
+            .collision();
     },
 
     drawLights: function() {
