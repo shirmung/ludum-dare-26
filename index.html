@@ -148,6 +148,11 @@
                         })
 
                         this.bind('EnterFrame', function() {
+                            // better thing to do would be to determine the direction of collision in general
+                            if (this.hit('Solid')) {
+                                this.attr({x: this.x, y: this.hit('Solid')[0].obj.y + this.hit('Solid')[0].obj.h});
+                            }
+
                             if (this.hit('Enemy')) {
                                 var currentEnemy = this.hit('Enemy')[0].obj;
 
