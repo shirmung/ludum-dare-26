@@ -15,6 +15,13 @@ Crafty.sprite("images/bench.png", {
   BenchSprite: [0, 0]
 });
 
+Crafty.sprite("images/city.png", {
+  CitySprite1: [0, 0],
+  CitySprite2: [146, 0],
+  CitySprite3: [226, 0],
+  CitySprite4: [338, 0]
+});
+
 function playAnimation(entity, animId, delay, repeat) {
   if (!entity.isPlaying(animId)) {
     entity.stop().animate(animId, delay, repeat);

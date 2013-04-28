@@ -30,6 +30,18 @@ var Environment = {
 
         Crafty.e('2D, DOM, BenchSprite')
             .attr({ x: 20, y: 400 - 74, w: 168, h: 74 });
+
+        Crafty.e('2D, DOM, CitySprite1')
+            .attr({ x: 1000, y: 400 - 208, w: 146, h: 208 });
+
+        Crafty.e('2D, DOM, CitySprite2')
+            .attr({ x: 1200, y: 400 - 500, w: 80, h: 500 });
+
+        Crafty.e('2D, DOM, CitySprite3')
+            .attr({ x: 1232, y: 400 - 152, w: 112, h: 152 });
+
+        Crafty.e('2D, DOM, CitySprite4')
+            .attr({ x: 1350, y: 400 - 156, w: 216, h: 156 });
     },
 
     drawLandscape: function() {
