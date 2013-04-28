@@ -119,6 +119,22 @@
                                             value.disabled = true;
                                         }
                                     });
+
+                                    Crafty.e("2D, DOM, Particles")
+                                        .attr({x: currentLight.x + 18, y: currentLight.y + 31})
+                                        .particles({
+                                            startColour: [200, 179, 162, 1],
+                                            startColourRandom: [20, 5, 0, 1],
+                                            endColour: [42, 39, 39, 1],
+                                            endColourRandom: [0, 0, 0, 1],
+                                            angle: 180,
+                                            angleRandom: 60,
+                                            lifeSpan: 45,
+                                            lifeSpanRandom: 15,
+                                            maxParticles: 20,
+                                            gravity: {x: 0, y: 0.03},
+                                            duration: 30
+                                        });
                                 } else {
                                     currentLight.removeComponent('LampSprite');
                                     currentLight.addComponent('LampOffSprite');
