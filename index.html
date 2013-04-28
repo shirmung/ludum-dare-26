@@ -20,7 +20,7 @@
         <script type="text/javascript">
             var enemies = [];
             var disabledLights = [];
-            var SCREEN_WIDTH = 1000;
+            var SCREEN_WIDTH = 2000;
             var SCREEN_HEIGHT = 600;
 
             // height and radius are optional; it's random otherwise
@@ -49,7 +49,8 @@
 
             }
 
-            Crafty.init(1000, 600);
+            Crafty.init(2000, 600);
+            Crafty.viewport.init(1000, 600);
 
             Crafty.scene('main-menu', function() {
                 Crafty.background('url(images/title.png) center center no-repeat');
@@ -60,10 +61,20 @@
 
             Crafty.scene('play-game', function() {
                 Crafty.background('url(images/background.png)');
-                
+
                 Crafty.e('2D, DOM, Platform, Color')
                     .color('#030408')
                     .attr({ x: 0, y: 400, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - 400 });
+
+                Crafty.e('2D, DOM, Start, Color, Collision, Solid')
+                    .color('rgb(0, 0, 255)')
+                    .attr({ x: 0, y: 0, w: 1, h: 600 })
+                    .collision();
+
+                Crafty.e('2D, DOM, End, Color, Collision, Solid')
+                    .color('rgb(0, 0, 255)')
+                    .attr({ x: 2000, y: 0, w: 1, h: 600 })
+                    .collision();
 
                 Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
                     .color('#030408')
@@ -182,6 +193,16 @@
                             if (this.hit('Solid')) {
                                 this.attr({x: from.x, y: from.y});
                             }
+
+                            if (this.x < from.x) {
+                                if (Crafty.viewport.x < 0) {
+                                     Crafty.viewport.x += (from.x - this.x);
+                                }
+                            } else {
+                                if (Crafty.viewport.x > -1000) {
+                                    Crafty.viewport.x -= (this.x - from.x);
+                                }
+                            }
                         })
 
                         this.bind('EnterFrame', function() {
@@ -214,6 +235,7 @@
                                 .collision()
                                 .gravity('Platform')
                                 .followAI(2);
+
                 enemies.push(enemy1);
 
 	            var enemy2 = Crafty.e('2D, DOM, Enemy, Color, Collision, Gravity, FollowAI')
@@ -222,6 +244,7 @@
                                 .collision()
                                 .gravity('Platform')
                                 .followAI(1);
+
                 enemies.push(enemy2);
             });
 
