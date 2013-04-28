@@ -2,6 +2,11 @@ Crafty.sprite(1, "images/protag.png", {
   ProtagSprite: [0, 0]
 }, 0);
 
+Crafty.sprite(1, "images/lamp.png", {
+  LampSprite: [0, 0],
+  LampOffSprite: [36, 0]
+}, 0);
+
 function playAnimation(entity, animId, delay, repeat) {
   if (!entity.isPlaying(animId)) {
     entity.stop().animate(animId, delay, repeat);

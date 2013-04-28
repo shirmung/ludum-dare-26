@@ -22,6 +22,22 @@
             var SCREEN_WIDTH = 1000;
             var SCREEN_HEIGHT = 600;
 
+            // height and radius are optional; it's random otherwise
+            function makeLight(x, y, height, radius) {
+                height = height || Math.floor(Math.random() * 120) + 100;
+                radius = radius || Math.floor(Math.random() * 400) + 100;
+
+                // Sprite for light
+                Crafty.e('2D, DOM, LampSprite, Collision')
+                    .attr({ x: x, y: y - height, w: 36, h: height })
+                    .collision();
+
+                // TODO: Turn the hitbox invisible
+                Crafty.e('2D, DOM, LampOffSprite, Light, Collision')
+                    .attr({ x: x, y: y - height, w: 36, h: 62 })
+                    .collision();
+            }
+
             Crafty.init(1000, 600);
 
             Crafty.scene('main-menu', function() {
@@ -53,15 +69,8 @@
                     .attr({ x: 600, y: 200, w: 50, h: 200 })
                 	.collision();
 
-                Crafty.e('2D, DOM, Light, Color, Collision')
-                    .color('rgb(255, 0, 255)')
-                    .attr({ x: 200, y: 300, w: 10, h: 10 })
-                    .collision();
-
-                Crafty.e('2D, DOM, Light, Color, Collision')
-                    .color('rgb(255, 0, 255)')
-                    .attr({ x: 450, y: 350, w: 10, h: 10 })
-                    .collision();
+                makeLight(200, 400);
+                makeLight(450, 400);
 
                 Crafty.c('FollowAI', {
                     _disabled: false,
@@ -100,8 +109,9 @@
                             if (this.hit('Light') && this.pressed) {
                                 var currentLight = this.hit('Light')[0].obj;
 
-                                if (currentLight.color() == 'rgb(255, 0, 255)') {
-                                    currentLight.color('rgb(255, 255, 0)');
+                                if (currentLight.has('LampOffSprite')) {
+                                    currentLight.removeComponent('LampOffSprite');
+                                    currentLight.addComponent('LampSprite');
                                     disabledLights.push(currentLight);
 
                                     $.each(enemies, function(index, value) {
@@ -110,7 +120,8 @@
                                         }
                                     });
                                 } else {
-                                    currentLight.color('rgb(255, 0, 255)');
+                                    currentLight.removeComponent('LampSprite');
+                                    currentLight.addComponent('LampOffSprite');
                                     disabledLights.splice(disabledLights.indexOf(currentLight), 1);
 
                                     $.each(enemies, function(index, value) {
