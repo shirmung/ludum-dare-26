@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>light</title>
+        <link rel="stylesheet" href="styles/compiled/style.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/crafty.js"></script>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+            // each enemy needs disabled variable
+            var disabled = false;
+
+            Crafty.init(1000, 600);
+        
+            Crafty.scene('main-menu', function() {
+                Crafty.background('#000');
+                Crafty.e('HTML')
+                    .attr({ w: 1000, h: 20, x: 0, y: 200 })
+                    .append('<div id="begin"><button id="begin-button">BEGIN</button></div>');                                     
+            });
+
+            Crafty.scene('play-game', function() {
+                Crafty.background('#333333');
+                
+                Crafty.e('2D, DOM, Platform, Color')
+                    .color('rgb(255, 0, 0)')
+                	.attr({ x: 0, y: 500, w: 1000, h: 1 });
+
+                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+                    .color('rgb(0, 0, 255)')
+                	.attr({ x: 300, y: 400, w: 50, h: 100 })
+                	.collision();
+
+                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+                    .color('rgb(0, 0, 255)')
+                	.attr({ x: 500, y: 400, w: 100, h: 100 })
+                	.collision();
+
+                Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+                    .color('rgb(0, 0, 255)')
+                	.attr({ x: 600, y: 300, w: 50, h: 200 })
+                	.collision();
+
+                var light = Crafty.e('2D, DOM, Light, Color, Collision')
+                                .color('rgb(255, 0, 255)')
+                                .attr({ x: 200, y: 400, w: 10, h: 10 })
+                                .collision();
+                                
+                Crafty.c('FollowAI', {
+                    _speed: 10,
+
+                    followAI: function() {
+                        this.bind('EnterFrame', function() {
+                            if (!disabled) {
+                                if (this.x < player.x + 5) {
+                                    this.x += 2;
+                                } else if (this.x > player.x + 5) {
+                                    this.x -= 2;
+                                }
+                            }
+                        });
+                    }
+                });
+
+                Crafty.c('LightSwitch', {
+                    _pressed: false, 
+
+                    lightSwitch: function() {
+                        this.requires('Collision')
+
+                        .bind('KeyDown', function(e) {
+                            if (e.key == Crafty.keys['SPACE']) {
+                                this.pressed = true;
+                            }
+                        })
+
+                        .bind('Moved', function(from) {
+                            if (this.hit('Light') && this.pressed) {
+
+                                if (light.color() == 'rgb(255, 0, 255)') {
+                                    light.color('rgb(255, 255, 0)');
+                                } else {
+                                    light.color('rgb(255, 0, 255)');
+                                }
+
+                                disabled = true;
+                                this.pressed = false;
+                            }
+                        });
+
+                        return this;
+                    }
+                });
+
+                Crafty.c('RunInto', {
+                    runInto: function() {
+                        this.requires('Collision')
+
+                        .bind('Moved', function(from) {
+                            if (this.hit('Solid')) {
+                                this.attr({x: from.x, y: from.y});
+                            } 
+
+                            if (this.hit('Enemy') && !disabled) {
+                                Crafty.stop();
+                                Crafty.e('HTML')
+                                    .append('<div style="font-size:40px; color: white">GAME OVER BItCHZ</div>');
+                            }
+                        });
+
+                        return this;
+                    }
+                });
+
+                var player = Crafty.e('2D, DOM, Player, Color, Twoway, Gravity, RunInto, LightSwitch')
+                                .color('rgb(0, 255, 0)')
+                	            .attr({ x: 10, y: 450, w: 10, h: 50 })
+                	            .twoway(3, 7)
+                	            .gravity('Platform')
+                	            .runInto()
+                	            .lightSwitch();
+
+                var enemy = Crafty.e('2D, DOM, Enemy, Color, Gravity, FollowAI')
+                                .color('rgb(0, 255, 255)')
+                	            .attr({ x: 300, y: 450, w: 10, h: 50 })
+                	            .gravity('Platform')
+                	            .followAI();
+            });
+
+            //Crafty.scene('main-menu');
+            Crafty.scene('play-game');
+
+            $('#begin-button').bind('click', function(){ 
+                Crafty.scene('play-game');
+            });
+        </script>
+    </body>
+</html>
