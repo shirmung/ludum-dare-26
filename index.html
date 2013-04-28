@@ -62,6 +62,9 @@
             Crafty.scene('play-game', function() {
                 Crafty.background('url(images/background.png)');
 
+                Crafty.e('2D, DOM, TreeSprite')
+                    .attr({ x: 100, y: 400 - 496, w: 2*196, h: 496 });
+                
                 Crafty.e('2D, DOM, Platform, Color')
                     .color('#030408')
                     .attr({ x: 0, y: 400, w: SCREEN_WIDTH, h: SCREEN_HEIGHT - 400 });

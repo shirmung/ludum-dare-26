@@ -7,6 +7,14 @@ Crafty.sprite(1, "images/lamp.png", {
   LampOffSprite: [36, 0]
 }, 0);
 
+Crafty.sprite("images/tree.png", {
+  TreeSprite: [0, 0]
+});
+
+Crafty.sprite("images/bench.png", {
+  BenchSprite: [0, 0]
+});
+
 function playAnimation(entity, animId, delay, repeat) {
   if (!entity.isPlaying(animId)) {
     entity.stop().animate(animId, delay, repeat);
