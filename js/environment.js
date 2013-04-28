@@ -19,7 +19,7 @@ var Environment = {
 
         Crafty.e('2D, DOM, End, Color, Collision, Solid')
             .color('rgb(0, 0, 255)')
-            .attr({ x: 2000, y: 0, w: 1, h: 600 })
+            .attr({ x: SCREEN_WIDTH, y: 0, w: 1, h: 600 })
             .collision();
     },
 
