@@ -20,7 +20,6 @@
             var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
 
             var enemies = [];
-            var disabledLights = [];
 
             Crafty.init(SCREEN_WIDTH, SCREEN_HEIGHT);
             Crafty.viewport.init(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
@@ -72,7 +71,6 @@
                                     currentLight.sprite(36, 0, currentLight.w, currentLight.h);
                                     currentLight.attr({on: false});
                                     currentLight.attr('lightCircle').hide();
-                                    disabledLights.push(currentLight);
 
                                     $.each(enemies, function(index, value) {
                                         var x = value.x - currentLight.x;
@@ -97,22 +95,23 @@
                                             gravity: {x: 0, y: 0.03},
                                             duration: 30
                                         });
-                                } else {
-                                    currentLight.sprite(0, 0, currentLight.w, currentLight.h);
-                                    currentLight.attr({on: true});
-                                    currentLight.attr('lightCircle').show();
-                                    disabledLights.splice(disabledLights.indexOf(currentLight), 1);
 
-                                    $.each(enemies, function(index, value) {
-                                        var x = value.x - currentLight.x;
-                                        var y = value.y - currentLight.y;
-                                        if (x * x + y * y <= lightRadius) {
-                                            value.disabled = false;
-                                        }
-                                    });
+                                    setTimeout(function() {
+                                        currentLight.sprite(0, 0, currentLight.w, currentLight.h);
+                                        currentLight.attr({on: true});
+                                        currentLight.attr('lightCircle').show();
+
+                                        $.each(enemies, function(index, value) {
+                                            var x = value.x - currentLight.x;
+                                            var y = value.y - currentLight.y;
+                                            if (x * x + y * y <= lightRadius) {
+                                                value.disabled = false;
+                                            }
+                                        });
+                                    }, 3000);
                                 }
 
-                                this.switched = false;
+                                this.touched = false;
                             }
                         })
 
