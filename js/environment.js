@@ -134,8 +134,8 @@ var Environment = {
     drawLights: function() {
         this.setUpLightSounds();
 
-        // this.makeLight(250, Environment.BASE_GROUND_Y);
-        // this.makeLight(450, Environment.BASE_GROUND_Y);
+        this.makeLight(370, Environment.BASE_GROUND_Y);
+        this.makeLight(650, Environment.BASE_GROUND_Y);
         // this.makeLight(1800, Environment.BASE_GROUND_Y);
         // this.makeLight(1800, Environment.BASE_GROUND_Y - 200);
         // this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
@@ -143,8 +143,8 @@ var Environment = {
 
     // height and radius are optional; it's random otherwise
     makeLight: function(x, y, height, radius) {
-        height = height || Math.floor(Math.random() * 145) + 75;
-        radius = radius || Math.floor(Math.random() * 200) + 75;
+        height = height || Math.floor(Math.random() * 145) + 90;
+        radius = radius || Math.floor(Math.random() * 200) + 90;
         radius = Math.max(height, radius);
 
         var lightCircle = Crafty.e('2D, DOM, CircleShape')
