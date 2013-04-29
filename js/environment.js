@@ -106,8 +106,8 @@ var Environment = {
     },
 
     drawLights: function() {
-        this.makeLight(250, Environment.BASE_GROUND_Y);
-        this.makeLight(450, Environment.BASE_GROUND_Y);
+        this.makeLight(550, Environment.BASE_GROUND_Y);
+        this.makeLight(750, Environment.BASE_GROUND_Y);
         this.makeLight(1700, Environment.BASE_GROUND_Y);
         this.makeLight(1700, Environment.BASE_GROUND_Y - 200);
         this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
