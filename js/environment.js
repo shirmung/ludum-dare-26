@@ -1,9 +1,11 @@
 var Environment = {
     BASE_GROUND_Y: 600,
+
     draw: function() {
         this.drawBoundaries();
         this.drawBackground();
         this.drawLandscape();
+        this.setUpLightSounds();
         this.drawLights();
     },
 
@@ -96,6 +98,11 @@ var Environment = {
             .color('#030408')
             .attr({ x: 3000, y: 0, w: 100, h: Environment.BASE_GROUND_Y - 100 })
             .collision();
+    },
+
+    setUpLightSounds: function() {
+        Crafty.audio.add('clickOn', ['audio/click_on.mp3', 'audio/click_on.wav', 'audio/click_on.ogg']);
+        Crafty.audio.add('clickOff', ['audio/click_off.mp3', 'audio/click_off.wav', 'audio/click_off.ogg']);
     },
 
     drawLights: function() {

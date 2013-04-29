@@ -83,6 +83,7 @@
                                     currentLight.sprite(36, 0, currentLight.w, currentLight.h);
                                     currentLight.attr({on: false});
                                     currentLight.attr('lightCircle').hide();
+                                    Crafty.audio.play('clickOff');
 
                                     $.each(enemies, function(index, value) {
                                         var x = value.x - currentLight.x;
@@ -112,6 +113,7 @@
                                         currentLight.sprite(0, 0, currentLight.w, currentLight.h);
                                         currentLight.attr({on: true});
                                         currentLight.attr('lightCircle').show();
+                                        Crafty.audio.play('clickOn');
 
                                         $.each(enemies, function(index, value) {
                                             var x = value.x - currentLight.x;
@@ -172,8 +174,7 @@
 
                 var cameraX = 0;
                 var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Twoway, Gravity, RunInto, LightSwitch, Tween')
-                                // .attr({ x: -32, y: Environment.BASE_GROUND_Y - 88, w: 64, h: 88 })
-                	            .attr({ x: 2900, y: Environment.BASE_GROUND_Y - 88, w: 64, h: 88 })
+                	            .attr({ x: 0, y: Environment.BASE_GROUND_Y - 88, w: 64, h: 88 })
                 	            .runInto()
                 	            .lightSwitch()
                                 .ProtagAnims()
