@@ -123,10 +123,13 @@ Crafty.c("CircleShape", {
 function say(thing, callback) {
   $("#dialogue").html(thing);
   $("#dialogue_wrapper").show();
-  function cont() {
-    $("#dialogue_wrapper").hide();
-    Crafty.unbind("KeyDown", cont);
-    callback();
+  function cont(event) {
+    var c = event.which;
+    if (c === Crafty.keys["ENTER"] || c === Crafty.keys["SPACE"] || c === Crafty.keys["Z"]) {
+      $("#dialogue_wrapper").hide();
+      Crafty.unbind("KeyDown", cont);
+      callback();
+    }
   }
   Crafty.bind("KeyDown", cont);
 }
