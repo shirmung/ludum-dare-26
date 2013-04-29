@@ -19,7 +19,8 @@ Crafty.sprite("images/city.png", {
   CitySprite1: [0, 0],
   CitySprite2: [146, 0],
   CitySprite3: [226, 0],
-  CitySprite4: [338, 0]
+  CitySprite4: [338, 0],
+  CitySprite5: [554, 0]
 });
 
 Crafty.sprite("images/star.png", {
