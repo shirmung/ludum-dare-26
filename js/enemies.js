@@ -10,14 +10,10 @@ function makeEnemy(x, y, opts) {
 
 var Enemies = {
     drawEnemies: function() {
-        var enemy1 = makeEnemy(290, 600, {leftLimit: 0, rightLimit: 290});
-        enemies.push(enemy1);
-
-        var enemy2 = makeEnemy(490, 600, {leftLimit: 0, rightLimit: 290});
-        enemies.push(enemy2);
-
-        enemies.push(makeEnemy(1800, 600, {leftLimit: 1550, rightLimit: 1900}));
-        enemies.push(makeEnemy(1850, 600, {leftLimit: 1550, rightLimit: 1900}));
-        enemies.push(makeEnemy(1800, 400, {leftLimit: 1600, rightLimit: 1900}));
+        enemies.push(makeEnemy(290, 590, {leftLimit: 0, rightLimit: 290}));
+        enemies.push(makeEnemy(490, 580, {leftLimit: 0, rightLimit: 290}));
+        enemies.push(makeEnemy(1800, 590, {leftLimit: 1550, rightLimit: 1900}));
+        enemies.push(makeEnemy(1850, 570, {leftLimit: 1550, rightLimit: 1900}));
+        enemies.push(makeEnemy(1800, 580, {leftLimit: 1600, rightLimit: 1900}));
     }
 };
