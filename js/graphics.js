@@ -30,6 +30,10 @@ Crafty.sprite("images/enemy.png", {
   EnemySprite: [0, 0]
 });
 
+Crafty.sprite("images/bed.png", {
+  BedSprite: [0, 0]
+});
+
 function playAnimation(entity, animId, delay, repeat) {
   if (!entity.isPlaying(animId)) {
     entity.stop().animate(animId, delay, repeat);

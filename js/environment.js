@@ -43,6 +43,17 @@ var Environment = {
 
         Crafty.e('2D, DOM, CitySprite4')
             .attr({ x: 1400, y: Environment.BASE_GROUND_Y - 156, w: 216, h: 156 });
+
+        Crafty.e('2D, DOM, Color')
+            .color("#191919")
+            .attr({ x: 3000, y: 0, w: 1100, h: Environment.BASE_GROUND_Y });
+
+        Crafty.e('2D, DOM, BedSprite')
+            .attr({ x: 3800, y: Environment.BASE_GROUND_Y - 113, w: 200, h: 113 });
+
+        Crafty.e("2D, DOM, Text").attr({ x: 3400, y: 100 })
+            .text("THIS GAME RULES AGREE Y/Y")
+            .textColor("#ffffff").textFont({ size: "48px", weight: "bold" });
     },
 
     drawLandscape: function() {
@@ -79,6 +90,11 @@ var Environment = {
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
             .attr({ x: 2500, y: Environment.BASE_GROUND_Y - 250, w: 100, h: 250 })
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 3000, y: 0, w: 100, h: Environment.BASE_GROUND_Y - 100 })
             .collision();
     },
 
