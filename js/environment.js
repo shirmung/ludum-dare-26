@@ -28,10 +28,10 @@ var Environment = {
         Crafty.background('url(images/background.png)');
 
         Crafty.e('2D, DOM, BenchSprite')
-            .attr({ x: 150, y: Environment.BASE_GROUND_Y - 74, w: 168, h: 74 });
+            .attr({ x: 200, y: Environment.BASE_GROUND_Y - 74, w: 168, h: 74 });
 
         Crafty.e('2D, DOM, TreeSprite')
-            .attr({ x: 250, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
+            .attr({ x: 290, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
 
         Crafty.e('2D, DOM, CitySprite4')
             .attr({ x: 1000, y: Environment.BASE_GROUND_Y - 156, w: 216, h: 156 });
