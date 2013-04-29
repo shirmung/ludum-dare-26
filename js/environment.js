@@ -66,10 +66,6 @@ var Environment = {
         Crafty.e('2D, DOM, TreeSprite')
             .attr({ x: 3900, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
 
-        Crafty.e('2D, DOM, Color')
-            .color("#191919")
-            .attr({ x: 4200, y: 0, w: 800, h: Environment.BASE_GROUND_Y });
-
         Crafty.e('2D, DOM, BedSprite')
             .attr({ x: 4800, y: Environment.BASE_GROUND_Y - 113, w: 200, h: 113 });
     },
@@ -124,6 +120,10 @@ var Environment = {
             .color('#030408')
             .attr({ x: 3450, y: Environment.BASE_GROUND_Y - 50, w: 100, h: 50 })
             .collision();
+
+        Crafty.e('2D, DOM, HTML')
+            .attr({ x: 4200, y: 0, w: 1024, h: 516 })
+            .replace("<div id='bedroom'></div>");
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
