@@ -171,24 +171,25 @@
                                 }
                             } else if (this.hit('Star')) {
                                 var star = this.hit('Star')[0].obj;
-                                star.destroy();
+                                //star.destroy();
                                 playIntro();
                             }
                         });
 
                         function playIntro() {
-                            player.removeComponent("Twoway");
+                            //player.removeComponent("Twoway");
                             Crafty.pause();
                             say("A FALLEN STAR!", function() {
                                 say("THIS WOULD MAKE A GOOD PRESENT FOR HER...", function() {
+                                    star.destroy();
                                     say("BUT...", function() {
                                         say("THERE ARE STRANGE MOTHS FLYING AROUND...", function() {
                                             say("I BETTER AVOID THEM WITH THE <span class='highlight'>ARROW KEYS</span>...", function() {
                                                 say("AND STUN THEM...", function() {
                                                     say("BY TURNING OFF LIGHTS WITH THE <span class='highlight'>SPACE BAR</span>.", function() {
                                                         Crafty.pause();
-                                                        player.addComponent("Twoway");
-                                                        player.stop().twoway(3, 7);
+                                                        //player.addComponent("Twoway");
+                                                        //player.stop().twoway(3, 7);
                                                     });
                                                 });
                                             });
@@ -225,7 +226,7 @@
                 Enemies.drawEnemies();
 
                 var star = Crafty.e('2D, DOM, Collision, StarSprite, Star')
-                                .attr({ x: 180, y: Environment.BASE_GROUND_Y - 36, w: 36, h: 36})
+                                .attr({ x: 63, y: Environment.BASE_GROUND_Y - 36, w: 36, h: 36})
                                 .collision();
             });
 
