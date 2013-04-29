@@ -3,8 +3,8 @@ var Environment = {
 
     draw: function() {
         this.drawBackground();
-        this.drawLandscape();
         this.drawLights();
+        this.drawLandscape();
         this.drawBoundaries();
     },
 
@@ -83,12 +83,17 @@ var Environment = {
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
             .attr({ x: 1230, y: Environment.BASE_GROUND_Y - 100, w: 400, h: 50 })
-        	.collision();
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 1280, y: Environment.BASE_GROUND_Y - 150, w: 100, h: 50 })
+            .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
             .attr({ x: 2300, y: Environment.BASE_GROUND_Y - 200, w: 400, h: 50 })
-         .collision();
+            .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
@@ -136,9 +141,8 @@ var Environment = {
 
         this.makeLight(370, Environment.BASE_GROUND_Y);
         this.makeLight(650, Environment.BASE_GROUND_Y);
-        // this.makeLight(1800, Environment.BASE_GROUND_Y);
-        // this.makeLight(1800, Environment.BASE_GROUND_Y - 200);
-        // this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
+        this.makeLight(1550, Environment.BASE_GROUND_Y - 100);
+        this.makeLight(3100, Environment.BASE_GROUND_Y - 150);
     },
 
     // height and radius are optional; it's random otherwise
