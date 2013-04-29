@@ -119,3 +119,14 @@ Crafty.c("CircleShape", {
     return this;
   }
 });
+
+function say(thing, callback) {
+  $("#dialogue").html(thing);
+  $("#dialogue_wrapper").show();
+  function cont() {
+    $("#dialogue_wrapper").hide();
+    Crafty.unbind("KeyDown", cont);
+    callback();
+  }
+  Crafty.bind("KeyDown", cont);
+}

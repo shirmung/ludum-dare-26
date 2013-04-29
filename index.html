@@ -11,9 +11,30 @@
         <script src="js/graphics.js"></script>
         <script src="js/environment.js"></script>
         <script src="js/enemies.js"></script>
+        <style>
+        #dialogue {
+            background: #111;
+            padding: 16px;
+            margin: 16px;
+            color: #7d7568;
+            font: 36px "Monaco", "Courier New", "Courier", monospace;
+        }
+
+        #dialogue_wrapper {
+            background: #222;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        </style>
     </head>
 
     <body>
+        <div id="dialogue_wrapper">
+            <div id='dialogue'>sup bros</div>
+        </div>
         <script type="text/javascript">
             var SCREEN_WIDTH = 4100;
             var SCREEN_HEIGHT = 768;
@@ -38,6 +59,8 @@
 
             Crafty.scene('play-game', function() {
                 Environment.draw();
+
+                playIntro();
 
                 Crafty.c('FollowAI', {
                     followAI: function() {
@@ -216,6 +239,22 @@
 
             Crafty.scene('main-menu');
             //Crafty.scene('play-game');
+            $("#dialogue_wrapper").appendTo($("#cr-stage")).hide();
+
+            function playIntro() {
+                Crafty.pause();
+                say("Oh! A fallen star!", function() {
+                    say("This would make a good present for her.", function() {
+                        say("But weird moth things are out and about.", function() {
+                            say("I better avoid them with the arrow keys.", function() {
+                                say("I can turn off the lampposts with SPACE and somehow stun them, too.", function() {
+                                    Crafty.pause();
+                                });
+                            });
+                        });
+                    });
+                });
+            }
         </script>
     </body>
 </html>
