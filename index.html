@@ -179,14 +179,18 @@
                         function playIntro() {
                             player.removeComponent("Twoway");
                             Crafty.pause();
-                            say("Oh! A fallen star!", function() {
-                                say("This would make a good present for her.", function() {
-                                    say("But weird moth things are out and about.", function() {
-                                        say("I better avoid them with the arrow keys.", function() {
-                                            say("I can turn off the lampposts with SPACE and somehow stun them, too.", function() {
-                                                Crafty.pause();
-                                                player.addComponent("Twoway");
-                                                player.stop().twoway(3, 7);
+                            say("A FALLEN STAR!", function() {
+                                say("THIS WOULD MAKE A GOOD PRESENT FOR HER...", function() {
+                                    say("BUT...", function() {
+                                        say("THERE ARE STRANGE MOTHS FLYING AROUND...", function() {
+                                            say("I BETTER AVOID THEM WITH THE <span class='highlight'>ARROW KEYS</span>...", function() {
+                                                say("AND STUN THEM...", function() {
+                                                    say("BY TURNING OFF LIGHTS WITH THE <span class='highlight'>SPACE BAR</span>.", function() {
+                                                        Crafty.pause();
+                                                        player.addComponent("Twoway");
+                                                        player.stop().twoway(3, 7);
+                                                    });
+                                                });
                                             });
                                         });
                                     });
