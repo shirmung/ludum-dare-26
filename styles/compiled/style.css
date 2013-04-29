@@ -67,3 +67,15 @@ html, body {
 
 #try-again {
   left: 808px; }
+
+#dialogue {
+  padding: 16px;
+  margin: 16px;
+  color: #7d7568; }
+
+#dialogue_wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; }
