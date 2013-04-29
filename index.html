@@ -11,6 +11,30 @@
         <script src="js/graphics.js"></script>
         <script src="js/environment.js"></script>
         <script src="js/enemies.js"></script>
+        <style>
+        #dialogue {
+            background: #111;
+            padding: 16px;
+            margin: 16px;
+            color: #7d7568;
+            font: 36px "Monaco", "Courier New", "Courier", monospace;
+        }
+
+        #dialogue_wrapper {
+            background: #222;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        #bedroom {
+            width: 1024px;
+            height: 600px;
+            background: url(images/bedroom.gif) no-repeat top left;
+        }
+        </style>
     </head>
 
     <body>
@@ -19,7 +43,7 @@
         </div>
 
         <script type="text/javascript">
-            var SCREEN_WIDTH = 5000;
+            var SCREEN_WIDTH = 5224;
             var SCREEN_HEIGHT = 768;
             var VIEWPORT_WIDTH = 1024;
             var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
