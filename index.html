@@ -28,8 +28,12 @@
             Crafty.scene('main-menu', function() {
                 Crafty.background('url(images/title.png) center center no-repeat');
                 Crafty.e('HTML')
-                    .attr({ w: SCREEN_WIDTH, h: 20, x: 0, y: SCREEN_HEIGHT - 20 })
-                    .append('<div id="begin"><button id="begin-button">BEGIN</button></div>');                                     
+                    .attr({ w: SCREEN_WIDTH, h: 36, x: 0, y: SCREEN_HEIGHT - 56 })
+                    .append('<div id="begin" class="start"><a>BEGIN</a></div>');
+
+                $('.start').bind('click', function() {
+                    Crafty.scene('play-game');
+                });
             });
 
             Crafty.scene('play-game', function() {
@@ -200,15 +204,18 @@
             });
 
             Crafty.scene('game-over', function() {
-                Crafty.background('red');
+                Crafty.background('#222');
+                Crafty.e('HTML')
+                    .attr({ w: SCREEN_WIDTH, h: 36, x: 0, y: SCREEN_HEIGHT - 56 })
+                    .append('<div id="try-again" class="start"><a>TRY AGAIN</a></div>');
+
+                $('.start').bind('click', function() {
+                    Crafty.scene('play-game');
+                });
             });
 
-            //Crafty.scene('main-menu');
-            Crafty.scene('play-game');
-
-            $('#begin-button').bind('click', function(){ 
-                Crafty.scene('play-game');
-            });
+            Crafty.scene('main-menu');
+            //Crafty.scene('play-game');
         </script>
     </body>
 </html>

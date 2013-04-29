@@ -3,6 +3,8 @@
 
 html, body {
     background: #222;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 36px;
 }
 
 #cr-stage {
@@ -10,7 +12,23 @@ html, body {
     margin-right: auto;
 }
 
-#begin {
+#begin, #try-again {
     position: absolute;
-    right: 1024px;
+    cursor: pointer;
+
+    a {
+        color: #7d7568;
+    }
+
+    a:hover {
+        color: #e9efd3;
+    }
+}
+
+#begin {
+    left: 894px;
+}
+
+#try-again {
+    left: 808px;
 }
