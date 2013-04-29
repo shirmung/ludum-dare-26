@@ -84,6 +84,27 @@ Crafty.c('ProtagAnims', {
   }
 });
 
+Crafty.c('Star', {
+  init: function() {
+    this.requires('Particles')
+      .particles({
+          startColour: [200, 179, 162, 1],
+          startColourRandom: [20, 5, 0, 1],
+          endColour: [42, 39, 39, 1],
+          endColourRandom: [0, 0, 0, 1],
+          angle: 0,
+          angleRandom: 60,
+          lifeSpan: 45,
+          lifeSpanRandom: 15,
+          maxParticles: 20,
+          fastMode: true,
+          size: 6,
+          sizeRandom: 2,
+          gravity: {x: 0, y: -0.02}
+      });
+  }
+});
+
 // Create circular element
 Crafty.c("CircleShape", {
   _circle: null,
@@ -123,10 +144,13 @@ Crafty.c("CircleShape", {
 function say(thing, callback) {
   $("#dialogue").html(thing);
   $("#dialogue_wrapper").show();
-  function cont() {
-    $("#dialogue_wrapper").hide();
-    Crafty.unbind("KeyDown", cont);
-    callback();
+  function cont(event) {
+    var c = event.which;
+    if (c === Crafty.keys["ENTER"] || c === Crafty.keys["SPACE"] || c === Crafty.keys["Z"]) {
+      $("#dialogue_wrapper").hide();
+      Crafty.unbind("KeyDown", cont);
+      callback();
+    }
   }
   Crafty.bind("KeyDown", cont);
 }

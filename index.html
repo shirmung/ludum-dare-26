@@ -60,8 +60,6 @@
             Crafty.scene('play-game', function() {
                 Environment.draw();
 
-                playIntro();
-
                 Crafty.c('FollowAI', {
                     followAI: function() {
                         this.bind('EnterFrame', function() {
@@ -190,10 +188,28 @@
                                 }
                             } else if (this.hit('Star')) {
                                 var star = this.hit('Star')[0].obj;
-                                // TODO: Cutscene!!!!!!!!
-                                console.log("CUTSCENE LOL");
+                                star.destroy();
+                                playIntro();
                             }
                         });
+
+                        function playIntro() {
+                            player.removeComponent("Twoway");
+                            Crafty.pause();
+                            say("Oh! A fallen star!", function() {
+                                say("This would make a good present for her.", function() {
+                                    say("But weird moth things are out and about.", function() {
+                                        say("I better avoid them with the arrow keys.", function() {
+                                            say("I can turn off the lampposts with SPACE and somehow stun them, too.", function() {
+                                                Crafty.pause();
+                                                player.addComponent("Twoway");
+                                                player.stop().twoway(3, 7);
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }
 
                         return this;
                     }
@@ -240,21 +256,6 @@
             Crafty.scene('main-menu');
             //Crafty.scene('play-game');
             $("#dialogue_wrapper").appendTo($("#cr-stage")).hide();
-
-            function playIntro() {
-                Crafty.pause();
-                say("Oh! A fallen star!", function() {
-                    say("This would make a good present for her.", function() {
-                        say("But weird moth things are out and about.", function() {
-                            say("I better avoid them with the arrow keys.", function() {
-                                say("I can turn off the lampposts with SPACE and somehow stun them, too.", function() {
-                                    Crafty.pause();
-                                });
-                            });
-                        });
-                    });
-                });
-            }
         </script>
     </body>
 </html>
