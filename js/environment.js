@@ -2,11 +2,10 @@ var Environment = {
     BASE_GROUND_Y: 600,
 
     draw: function() {
-        this.drawBoundaries();
         this.drawBackground();
         this.drawLandscape();
-        this.setUpLightSounds();
         this.drawLights();
+        this.drawBoundaries();
     },
 
     drawBoundaries: function() {
@@ -28,75 +27,102 @@ var Environment = {
     drawBackground: function() {
         Crafty.background('url(images/background.png)');
 
-        Crafty.e('2D, DOM, TreeSprite')
-            .attr({ x: 100, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
-
         Crafty.e('2D, DOM, BenchSprite')
-            .attr({ x: 20, y: Environment.BASE_GROUND_Y - 74, w: 168, h: 74 });
+            .attr({ x: 150, y: Environment.BASE_GROUND_Y - 74, w: 168, h: 74 });
 
-        Crafty.e('2D, DOM, CitySprite1')
-            .attr({ x: 1000, y: Environment.BASE_GROUND_Y - 208, w: 146, h: 208 });
-
-        Crafty.e('2D, DOM, CitySprite2')
-            .attr({ x: 1200, y: Environment.BASE_GROUND_Y - 500, w: 80, h: 500 });
-
-        Crafty.e('2D, DOM, CitySprite3')
-            .attr({ x: 1262, y: Environment.BASE_GROUND_Y - 152, w: 112, h: 152 });
+        Crafty.e('2D, DOM, TreeSprite')
+            .attr({ x: 250, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
 
         Crafty.e('2D, DOM, CitySprite4')
-            .attr({ x: 1400, y: Environment.BASE_GROUND_Y - 156, w: 216, h: 156 });
+            .attr({ x: 1000, y: Environment.BASE_GROUND_Y - 156, w: 216, h: 156 });
+
+        Crafty.e('2D, DOM, CitySprite2')
+            .attr({ x: 1250, y: Environment.BASE_GROUND_Y - 550, w: 80, h: 500 });
+
+        Crafty.e('2D, DOM, CitySprite5')
+            .attr({ x: 1350, y: Environment.BASE_GROUND_Y - 398, w: 80, h: 398 });
+
+        Crafty.e('2D, DOM, CitySprite5')
+            .attr({ x: 1435, y: Environment.BASE_GROUND_Y - 350, w: 80, h: 398 });
+
+        Crafty.e('2D, DOM, CitySprite2')
+            .attr({ x: 1700, y: Environment.BASE_GROUND_Y - 500, w: 80, h: 500 });
+
+        Crafty.e('2D, DOM, CitySprite1')
+            .attr({ x: 1580, y: Environment.BASE_GROUND_Y - 208, w: 146, h: 208 });
+
+        Crafty.e('2D, DOM, CitySprite5')
+            .attr({ x: 1800, y: Environment.BASE_GROUND_Y - 350, w: 80, h: 398 });
+
+        Crafty.e('2D, DOM, CitySprite5')
+            .attr({ x: 2000, y: Environment.BASE_GROUND_Y - 300, w: 80, h: 398 });
+
+        Crafty.e('2D, DOM, CitySprite5')
+            .attr({ x: 2200, y: Environment.BASE_GROUND_Y - 398, w: 80, h: 398 });
+
+        Crafty.e('2D, DOM, CitySprite3')
+            .attr({ x: 2120, y: Environment.BASE_GROUND_Y - 152, w: 112, h: 152 });
+
+        Crafty.e('2D, DOM, TreeSprite')
+            .attr({ x: 3900, y: Environment.BASE_GROUND_Y - 496, w: 392, h: 496 });
 
         Crafty.e('2D, DOM, Color')
             .color("#191919")
-            .attr({ x: 3000, y: 0, w: 1100, h: Environment.BASE_GROUND_Y });
+            .attr({ x: 4200, y: 0, w: 800, h: Environment.BASE_GROUND_Y });
 
         Crafty.e('2D, DOM, BedSprite')
-            .attr({ x: 3800, y: Environment.BASE_GROUND_Y - 113, w: 200, h: 113 });
-
-        Crafty.e("2D, DOM, Text").attr({ x: 3400, y: 100 })
-            .text("THIS GAME RULES AGREE Y/Y")
-            .textColor("#ffffff").textFont({ size: "48px", weight: "bold" });
+            .attr({ x: 4800, y: Environment.BASE_GROUND_Y - 113, w: 200, h: 113 });
     },
 
     drawLandscape: function() {
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 1050, y: Environment.BASE_GROUND_Y - 50, w: 500, h: 50 })
+            .attr({ x: 1180, y: Environment.BASE_GROUND_Y - 50, w: 500, h: 50 })
         	.collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 1100, y: Environment.BASE_GROUND_Y - 100, w: 400, h: 50 })
+            .attr({ x: 1230, y: Environment.BASE_GROUND_Y - 100, w: 400, h: 50 })
         	.collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 1600, y: Environment.BASE_GROUND_Y - 200, w: 400, h: 50 })
-        	.collision();
+            .attr({ x: 2300, y: Environment.BASE_GROUND_Y - 200, w: 400, h: 50 })
+         .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 2100, y: 0, w: 50, h: Environment.BASE_GROUND_Y - 150 })
+            .attr({ x: 2600, y: 0, w: 50, h: Environment.BASE_GROUND_Y - 150 })
             .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 2150, y: Environment.BASE_GROUND_Y - 200, w: 150, h: 50 })
+            .attr({ x: 2650, y: Environment.BASE_GROUND_Y - 200, w: 150, h: 50 })
             .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 2450, y: Environment.BASE_GROUND_Y - 100, w: 50, h: 100 })
+            .attr({ x: 2900, y: Environment.BASE_GROUND_Y - 100, w: 50, h: 100 })
             .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 2500, y: Environment.BASE_GROUND_Y - 250, w: 100, h: 250 })
+            .attr({ x: 2950, y: Environment.BASE_GROUND_Y - 250, w: 100, h: 250 })
             .collision();
 
         Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
             .color('#030408')
-            .attr({ x: 3000, y: 0, w: 100, h: Environment.BASE_GROUND_Y - 100 })
+            .attr({ x: 3050, y: Environment.BASE_GROUND_Y - 150, w: 400, h: 150 })
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 3450, y: Environment.BASE_GROUND_Y - 50, w: 100, h: 50 })
+            .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 4200, y: 0, w: 100, h: Environment.BASE_GROUND_Y - 100 })
             .collision();
     },
 
@@ -106,11 +132,13 @@ var Environment = {
     },
 
     drawLights: function() {
-        this.makeLight(250, Environment.BASE_GROUND_Y);
-        this.makeLight(450, Environment.BASE_GROUND_Y);
-        this.makeLight(1700, Environment.BASE_GROUND_Y);
-        this.makeLight(1700, Environment.BASE_GROUND_Y - 200);
-        this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
+        this.setUpLightSounds();
+
+        // this.makeLight(250, Environment.BASE_GROUND_Y);
+        // this.makeLight(450, Environment.BASE_GROUND_Y);
+        // this.makeLight(1800, Environment.BASE_GROUND_Y);
+        // this.makeLight(1800, Environment.BASE_GROUND_Y - 200);
+        // this.makeLight(2300, Environment.BASE_GROUND_Y, 225, 200);
     },
 
     // height and radius are optional; it's random otherwise
