@@ -13,6 +13,7 @@ var Enemies = {
         enemies.push(makeEnemy(700, 590, {leftLimit: 0, rightLimit: 1130}));
         enemies.push(makeEnemy(1100, 580, {leftLimit: 0, rightLimit: 1130}));
         enemies.push(makeEnemy(1500, 480, {leftLimit: 1380, rightLimit: 1580}));
+        enemies.push(makeEnemy(2800, 580, {leftLimit: 1400, rightLimit: 2900}));
         enemies.push(makeEnemy(2800, 400, {leftLimit: 2650, rightLimit: 2750}));
     }
 };
