@@ -159,8 +159,8 @@ var Environment = {
 
         this.makeLight(370, Environment.BASE_GROUND_Y);
         this.makeLight(650, Environment.BASE_GROUND_Y);
-        this.makeLight(1550, Environment.BASE_GROUND_Y - 100);
-        this.makeLight(3100, Environment.BASE_GROUND_Y - 150);
+        this.makeLight(1450, Environment.BASE_GROUND_Y - 100, 125);
+        this.makeLight(2800, Environment.BASE_GROUND_Y, 225);
     },
 
     // height and radius are optional; it's random otherwise
