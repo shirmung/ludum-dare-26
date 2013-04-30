@@ -35,6 +35,7 @@
             var VIEWPORT_HEIGHT = SCREEN_HEIGHT;
 
             var enemies = [];
+            var state = {};
 
             Crafty.init(SCREEN_WIDTH, SCREEN_HEIGHT);
             Crafty.viewport.init(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
@@ -179,7 +180,8 @@
                                 if (!currentEnemy.disabled) {
                                     Crafty.scene('game-over');
                                 }
-                            } else if (this.hit('Star')) {
+                            } else if (this.hit('Star') && !state.hitStar) {
+                                state.hitStar = true;
                                 var star = this.hit('Star')[0].obj;
                                 playIntro();
                             }
@@ -214,12 +216,13 @@
 
                 var cameraX = 0;
                 var player = Crafty.e('2D, DOM, ProtagSprite, ProtagAnims, Twoway, Gravity, RunInto, LightSwitch, Tween')
-                                .attr({ x: 0, y: Environment.BASE_GROUND_Y - 88, w: 54, h: 88 })
+                                // .attr({ x: 0, y: Environment.BASE_GROUND_Y - 88, w: 54, h: 88 })
+                                .attr({ x: 4500, y: Environment.BASE_GROUND_Y - 88, w: 54, h: 88 })
                                 .runInto()
                                 .lightSwitch()
                                 .ProtagAnims()
                                 .animate('walk_right', 20, -1)
-                                .tween({x: 10}, 10)
+                                // .tween({x: 10}, 10)
                                 .bind('EnterFrame', function() {
                                     cameraX -= (this.x + cameraX)/10;
                                     Crafty.viewport.x = cameraX + VIEWPORT_WIDTH / 2;
@@ -237,6 +240,7 @@
                 var star = Crafty.e('2D, DOM, Collision, StarSprite, Star')
                                 .attr({ x: 63, y: Environment.BASE_GROUND_Y - 36, w: 36, h: 36})
                                 .collision();
+                Environment.setUpFloatingStar();
             });
 
             Crafty.scene('game-over', function() {

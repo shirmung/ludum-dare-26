@@ -141,6 +141,27 @@ Crafty.c("CircleShape", {
   }
 });
 
+// Create star glow
+Crafty.c("StarGlow", {
+  init: function() {
+    var radius = 150;
+    var paper = Raphael(this._element, 2*radius, 2*radius);
+    var circle = paper.circle(radius, radius, radius);
+    circle.attr({"fill": "r#c8b3a2-#c8b3a2", "opacity": "0.01"});
+
+    function AnimateCircle() {
+      circle.animate({r: radius - 3}, 750, AnimateCircleBack)
+    }
+
+    function AnimateCircleBack() {
+      circle.animate({r: radius}, 750, AnimateCircle);
+    }
+
+    AnimateCircle();
+    return this;
+  }
+});
+
 function say(thing, callback) {
   $("#dialogue").html(thing);
   $("#dialogue_wrapper").show();

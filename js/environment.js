@@ -131,6 +131,19 @@ var Environment = {
             .collision();
     },
 
+    setUpFloatingStar: function() {
+        var toggle = true;
+        var star1 = Crafty.e('2D, DOM, StarGlow')
+            .attr({ x: 4600, y: Environment.BASE_GROUND_Y - 360, w: 36, h: 36});
+        var star2 = Crafty.e('2D, DOM, StarSprite, Star')
+            .attr({ x: 4725, y: Environment.BASE_GROUND_Y - 236, w: 36, h: 36});
+        setInterval(function() {
+            var sin = Math.sin(Crafty.frame() / 50);
+            star1.y = Environment.BASE_GROUND_Y - 360 + 25 * sin;
+            star2.y = Environment.BASE_GROUND_Y - 236 + 25 * sin;
+        }, 25);
+    },
+
     setUpLightSounds: function() {
         Crafty.audio.add('clickOn', ['audio/click_on.mp3', 'audio/click_on.wav', 'audio/click_on.ogg']);
         Crafty.audio.add('clickOff', ['audio/click_off.mp3', 'audio/click_off.wav', 'audio/click_off.ogg']);
