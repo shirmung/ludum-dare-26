@@ -147,8 +147,8 @@ var Environment = {
 
     // height and radius are optional; it's random otherwise
     makeLight: function(x, y, height, radius) {
-        height = height || Math.floor(Math.random() * 145) + 90;
-        radius = radius || Math.floor(Math.random() * 200) + 90;
+        height = height || Math.floor(Math.random() * 145) + 75;
+        radius = radius || Math.floor(Math.random() * 200) + 75;
         radius = Math.max(height, radius);
 
         var lightCircle = Crafty.e('2D, DOM, CircleShape')

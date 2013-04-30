@@ -12,22 +12,6 @@
         <script src="js/environment.js"></script>
         <script src="js/enemies.js"></script>
         <style>
-        #dialogue {
-            background: #111;
-            padding: 16px;
-            margin: 16px;
-            color: #7d7568;
-            font: 36px "Monaco", "Courier New", "Courier", monospace;
-        }
-
-        #dialogue_wrapper {
-            background: #222;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
 
         #bedroom {
             width: 1024px;
@@ -41,6 +25,8 @@
         <div id="dialogue_wrapper">
             <div id="dialogue">sup bros</div>
         </div>
+
+        <div id="try-again"><a>GAME OVER</a></div>
 
         <script type="text/javascript">
             var SCREEN_WIDTH = 5224;
@@ -255,18 +241,20 @@
 
             Crafty.scene('game-over', function() {
                 Crafty.background('#222');
-                Crafty.e('HTML')
-                    .attr({ w: SCREEN_WIDTH, h: 36, x: 0, y: SCREEN_HEIGHT - 56 })
-                    .append('<div id="try-again" class="start"><a>TRY AGAIN</a></div>');
+                $("#try-again").show();
+                // Crafty.e('HTML')
+                //                     .attr({ w: SCREEN_WIDTH, h: 36, x: 0, y: SCREEN_HEIGHT - 56 })
+                //                     .append('');
 
-                $('.start').bind('click', function() {
-                    Crafty.scene('play-game');
-                });
+                // $('.start').bind('click', function() {
+                //     Crafty.scene('play-game');
+                // });
             });
 
             Crafty.scene('main-menu');
             //Crafty.scene('play-game');
             $("#dialogue_wrapper").appendTo($("#cr-stage")).hide();
+            $("#try-again").appendTo($("#cr-stage")).hide();
         </script>
     </body>
 </html>

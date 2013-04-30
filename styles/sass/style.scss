@@ -14,23 +14,24 @@ html, body {
 
 #begin, #try-again {
     position: absolute;
-    cursor: pointer;
 
     a {
         color: #7d7568;
     }
+}
+
+#begin {
+    left: 894px;
+    cursor: pointer;
 
     a:hover {
         color: #e9efd3;
     }
 }
 
-#begin {
-    left: 894px;
-}
-
 #try-again {
-    left: 808px;
+    bottom: 20px;
+    right: 20px;
 }
 
 #dialogue_wrapper {

@@ -55,18 +55,19 @@ html, body {
   margin-right: auto; }
 
 #begin, #try-again {
-  position: absolute;
-  cursor: pointer; }
+  position: absolute; }
   #begin a, #try-again a {
     color: #7d7568; }
-  #begin a:hover, #try-again a:hover {
-    color: #e9efd3; }
 
 #begin {
-  left: 894px; }
+  left: 894px;
+  cursor: pointer; }
+  #begin a:hover {
+    color: #e9efd3; }
 
 #try-again {
-  left: 808px; }
+  bottom: 20px;
+  right: 20px; }
 
 #dialogue_wrapper {
   position: absolute;
