@@ -129,6 +129,11 @@ var Environment = {
             .color('#030408')
             .attr({ x: 4200, y: 0, w: 100, h: Environment.BASE_GROUND_Y - 100 })
             .collision();
+
+        Crafty.e('2D, DOM, Platform, Building, Color, Collision, Solid')
+            .color('#030408')
+            .attr({ x: 4200, y: 0, w: 1024, h: 200 })
+            .collision();
     },
 
     setUpFloatingStar: function() {
