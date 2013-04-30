@@ -3,9 +3,9 @@ var Environment = {
 
     draw: function() {
         this.drawBackground();
-        this.drawLights();
         this.drawLandscape();
         this.drawBoundaries();
+        this.drawLights();
     },
 
     drawBoundaries: function() {
